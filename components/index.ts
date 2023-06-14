@@ -3,6 +3,7 @@ import CustomButton from "./CustomButton";
 import Header from "./Header";
 import Library from "./Library";
 import ListItem from "./ListItem";
+import Modal from "./Modal";
 import Sidebar from "./Sidebar";
 import SidebarItem from "./SidebarItem";
 
@@ -12,6 +13,7 @@ export {
     Header,
     Library,
     ListItem,
+    Modal,
     Sidebar,
     SidebarItem,
 }
