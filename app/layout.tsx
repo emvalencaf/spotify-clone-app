@@ -1,6 +1,8 @@
 // components
 import { Sidebar } from '../components'
-import { SupabaseProvider } from '../providers'
+
+// providers
+import { ModalProvider, SupabaseProvider, UserProvider } from '../providers'
 
 
 // styles
@@ -27,9 +29,12 @@ export default function RootLayout({
         className={font.className}
       >
         <SupabaseProvider>
-          <Sidebar>
-            {children}
-          </Sidebar>
+          <UserProvider>
+            <ModalProvider />
+            <Sidebar>
+              {children}
+            </Sidebar>
+          </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
