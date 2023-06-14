@@ -10,11 +10,12 @@ import { UserContext } from "../../contexts";
 // interfaces
 import { Subscription } from "../../types/subscription";
 import { UserDetails } from "../../types/userDetails";
+
 interface Props {
     [propName: string]: any;
 }
 
-export const MyUserContextProvider = (props: Props) => {
+const MyUserContextProvider = (props: Props) => {
 
     // sessions
     const {
@@ -75,3 +76,5 @@ export const MyUserContextProvider = (props: Props) => {
 
     return <UserContext.Provider value={value} {...props} />
 }
+
+export default MyUserContextProvider;

@@ -14,6 +14,8 @@ export type UserContextType = {
     subscription: Subscription | null;
 }
 
-export const UserContext = createContext<UserContextType | undefined> (
+const UserContext = createContext<UserContextType | undefined> (
     undefined
 );
+
+export default UserContext;
