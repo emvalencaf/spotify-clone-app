@@ -41,7 +41,16 @@ const Sidebar = ({ children }: SidebarProps) => {
             className='flex h-full'
         >
             <div
-                className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300p] p-2"
+                className="
+                hidden 
+                md:flex 
+                flex-col 
+                gap-y-2 
+                bg-black 
+                h-full 
+                w-[300px] 
+                p-2
+                "
             >
                 <Box>
                     <div

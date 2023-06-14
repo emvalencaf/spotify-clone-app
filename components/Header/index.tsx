@@ -1,7 +1,7 @@
 "use client";
 
 // hooks
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 // icons
 import { HiHome } from 'react-icons/hi';
@@ -21,7 +21,7 @@ export interface HeaderProps {
 const Header = ({
     children,
     className = "",
-}: HeaderProps ) => {
+}: HeaderProps) => {
     // router states
     const router = useRouter();
 
@@ -39,13 +39,20 @@ const Header = ({
             `, className)}
         >
             <div
-                className="w-full mb-4 items-center justify-between"
+                className="w-full mb-4 flex items-center justify-between"
             >
                 <div
                     className="hidden md:flex gap-x-2 items-center"
                 >
                     <button
-                        className="rounded-full bg-black flex items-center justify-center hover:opacity-75 transition"
+                        className="              rounded-full 
+              bg-black 
+              flex 
+              items-center 
+              justify-center 
+              cursor-pointer 
+              hover:opacity-75 
+              transition"
                     >
                         <RxCaretLeft
                             onClick={() => router.back()}
@@ -54,7 +61,16 @@ const Header = ({
                         />
                     </button>
                     <button
-                        className="rounded-full bg-black flex items-center justify-center hover:opacity-75 transition"
+                        className="
+                        rounded-full 
+                        bg-black 
+                        flex 
+                        items-center 
+                        justify-center 
+                        cursor-pointer 
+                        hover:opacity-75 
+                        transition
+                        "
                     >
                         <RxCaretRight
                             onClick={() => router.forward()}
@@ -64,10 +80,21 @@ const Header = ({
                     </button>
                 </div>
                 <div
-                    className="flex md:hhidden gap-x-2 items-center"
+                    className="flex md:hidden gap-x-2 items-center"
                 >
                     <button
-                        className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition"
+                    onClick={() => router.push('/')}
+                        className="
+                        rounded-full 
+                        p-2 
+                        bg-white 
+                        flex 
+                        items-center 
+                        justify-center 
+                        cursor-pointer 
+                        hover:opacity-75 
+                        transition
+                        "
                     >
                         <HiHome
                             className="text-black"
@@ -75,7 +102,17 @@ const Header = ({
                         />
                     </button>
                     <button
-                        className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition"
+                        className="
+                        rounded-full 
+                        p-2 
+                        bg-white 
+                        flex 
+                        items-center 
+                        justify-center 
+                        cursor-pointer 
+                        hover:opacity-75 
+                        transition
+                    "
                     >
                         <BiSearch
                             className="text-black"
@@ -87,12 +124,25 @@ const Header = ({
                     <>
                         <div>
                             <CustomButton
-                            
-                            />
+                                onClick={() => { }}
+                                className="bg-transparent text-neutral-300 font-medium"
+                            >
+                                Sign up
+                            </CustomButton>
+                        </div>
+
+                        <div>
+                            <CustomButton
+                                onClick={() => { }}
+                                className="bg-white px-6 py-2"
+                            >
+                                Log in
+                            </CustomButton>
                         </div>
                     </>
                 </div>
             </div>
+            {children}
         </header>
     );
 }
