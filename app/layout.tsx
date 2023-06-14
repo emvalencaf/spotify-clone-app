@@ -1,5 +1,6 @@
 // components
 import { Sidebar } from '../components'
+import { SupabaseProvider } from '../providers'
 
 
 // styles
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body
         className={font.className}
       >
-        <Sidebar>
-          {children}
-        </Sidebar>
+        <SupabaseProvider>
+          <Sidebar>
+            {children}
+          </Sidebar>
+        </SupabaseProvider>
       </body>
     </html>
   )
