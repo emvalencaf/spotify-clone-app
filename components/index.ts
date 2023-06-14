@@ -1,3 +1,4 @@
+import AuthModal from "./AuthModal";
 import Box from "./Box";
 import CustomButton from "./CustomButton";
 import Header from "./Header";
@@ -8,6 +9,7 @@ import Sidebar from "./Sidebar";
 import SidebarItem from "./SidebarItem";
 
 export {
+    AuthModal,
     Box,
     CustomButton,
     Header,

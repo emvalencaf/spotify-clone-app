@@ -11,6 +11,7 @@ import { BiSearch } from 'react-icons/bi';
 // tailwindcss deps
 import { twMerge } from "tailwind-merge";
 import { CustomButton } from "..";
+import { useAuthModal } from "../../hooks";
 
 // types
 export interface HeaderProps {
@@ -24,6 +25,8 @@ const Header = ({
 }: HeaderProps) => {
     // router states
     const router = useRouter();
+
+    const authModal = useAuthModal();
 
     const handleLogout = () => {
         // TODO: handle logout
@@ -124,7 +127,7 @@ const Header = ({
                     <>
                         <div>
                             <CustomButton
-                                onClick={() => { }}
+                                onClick={authModal.onOpen}
                                 className="bg-transparent text-neutral-300 font-medium"
                             >
                                 Sign up
@@ -133,7 +136,7 @@ const Header = ({
 
                         <div>
                             <CustomButton
-                                onClick={() => { }}
+                                onClick={authModal.onOpen}
                                 className="bg-white px-6 py-2"
                             >
                                 Log in
