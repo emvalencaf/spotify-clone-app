@@ -1,11 +1,18 @@
+
+// actions
 import { getSongsByTitle } from "../../actions";
+
+// custom components
 import { Header, SearchContent, SearchInput } from "../../components";
 
+// interfaces
 export interface SearchProps {
     searchParams: {
         title: string;
     }
 }
+
+export const revalidate = 0;
 
 const Search = async ({
     searchParams
