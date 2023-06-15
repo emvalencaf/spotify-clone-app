@@ -1,17 +1,23 @@
 "use client";
 
+// custom hooks
+import { useAuthModal, useUploadModal, useUser } from '../../hooks';
+
+// custom components
+import { MediaItem } from '..';
+
 // icons
 import { TbPlaylist } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useAuthModal, useUploadModal, useUser } from '../../hooks';
 
-// types
+// interfaces
+import { Song } from '../../types/song';
 export interface LibraryProps {
-
+    songs: Song[];
 }
 
 const Library = ({
-
+    songs,
 }: LibraryProps) => {
     // modals controller
     const authModal = useAuthModal();
@@ -55,7 +61,15 @@ const Library = ({
             <div
                 className="flex flex-col gap-y-2 mt-4 px-3"
             >
-                List of Songs!
+                {
+                    songs.map((song) => (
+                        <MediaItem
+                            key={song.id}
+                            onClick={() => { }}
+                            data={song}
+                        />
+                    ))
+                }
             </div>
         </div>
     );

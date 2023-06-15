@@ -108,10 +108,10 @@ const UploadModal = () => {
             router.refresh();
 
             setIsLoading(false);
-            
+
             toast.success('Song created!');
             reset();
-            
+
             uploadModal.onClose();
         } catch (error) {
             setIsLoading(false);
@@ -134,20 +134,24 @@ const UploadModal = () => {
             isOpen={uploadModal.isOpen}
             onChange={handleChange}
         >
-            <form
-                className="flex flex-col gap-y-4"
-                onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className="flex flex-col gap-y-4"
+                onSubmit={handleSubmit(onSubmit)}>
                 <CustomInput
                     id="title"
                     disabled={isLoading}
-                    {...register('title'), { required: true }}
+                    {...register('title', {
+                        required: true,
+                    })}
                     placeholder="Song title"
                 />
                 <CustomInput
                     id="author"
                     disabled={isLoading}
-                    {...register('author'), { required: true }}
+                    {
+                    ...register('author', {
+                        required: true,
+                    })
+                    }
                     placeholder="Song author"
                 />
                 <div>
@@ -159,7 +163,11 @@ const UploadModal = () => {
                         type="file"
                         disabled={isLoading}
                         accept=".mp3"
-                        {...register('song'), { required: true }}
+                        {
+                            ...register('song', {
+                                required: true,
+                            })
+                        }
                     />
                 </div>
                 <div>
@@ -171,7 +179,7 @@ const UploadModal = () => {
                         type="file"
                         disabled={isLoading}
                         accept="image/*"
-                        {...register('image'), { required: true }}
+                        {...register('image', { required: true })}
                     />
                 </div>
                 <CustomButton

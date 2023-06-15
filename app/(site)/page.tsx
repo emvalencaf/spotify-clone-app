@@ -2,9 +2,13 @@
 import Image from 'next/image'
 
 // custom components
-import { Header, ListItem } from '../../components'
+import { Header, ListItem, PageContent } from '../../components'
 
-export default function Home() {
+// actions
+import { getSongs } from '../../actions'
+
+export default async function Home() {
+  const songs = await getSongs();
   return (
     <div
       className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto"
@@ -43,9 +47,9 @@ export default function Home() {
             Newest songs
           </h1>
         </div>
-        <div>
-          List of Songs!
-        </div>
+        <PageContent
+          songs={songs}
+        />
       </div>
     </div>
   )

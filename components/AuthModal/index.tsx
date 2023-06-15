@@ -17,10 +17,6 @@ import { Auth } from "@supabase/auth-ui-react";
 // custom components
 import { Modal } from "..";
 
-export interface AuthModalProps {
-
-}
-
 const AuthModal = () => {
     // supabase client
     const supabaseClient = useSupabaseClient();
@@ -36,7 +32,7 @@ const AuthModal = () => {
     useEffect(() => {
         if(session) {
             router.refresh();
-            onClose()
+            onClose();
         }
     },[session, router, onClose]);
 
@@ -56,7 +52,7 @@ const AuthModal = () => {
             <Auth
                 theme="dark"
                 providers={["github"]}
-                magicLink
+                magicLink={true}
                 supabaseClient={supabaseClient}
                 appearance={{
                     theme: ThemeSupa,

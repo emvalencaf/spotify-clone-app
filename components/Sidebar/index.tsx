@@ -10,14 +10,16 @@ import { Box, Library, SidebarItem } from '../';
 // types
 export interface SidebarProps {
     children: React.ReactNode;
+    songs: Song[];
 }
 
 // icons
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { Song } from '../../types/song';
 
 
-const Sidebar = ({ children }: SidebarProps) => {
+const Sidebar = ({ children, songs }: SidebarProps) => {
     // states navigation
     const pathname = usePathname();
 
@@ -69,7 +71,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                 <Box
                     className='overflow-y-auto h-full'
                 >
-                    <Library />
+                    <Library songs={songs} />
                 </Box>
             </div>
             <main

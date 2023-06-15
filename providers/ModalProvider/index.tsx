@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 // custom components
-import { AuthModal, Modal, UploadModal } from "../../components";
+import { AuthModal, UploadModal } from "../../components";
 
 const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false);

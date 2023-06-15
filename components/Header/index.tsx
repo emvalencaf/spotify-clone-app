@@ -28,7 +28,7 @@ export interface HeaderProps {
 
 const Header = ({
     children,
-    className = "",
+    className,
 }: HeaderProps) => {
     // router states
     const router = useRouter();
@@ -41,6 +41,8 @@ const Header = ({
 
     const { user } = useUser();
 
+    console.log(user);
+
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
 
@@ -48,7 +50,7 @@ const Header = ({
 
         router.refresh();
 
-        error ? toast.error(error.message): toast.success('Logged out');
+        error ? toast.error(error.message) : toast.success('Logged out');
     }
 
     return (
@@ -143,52 +145,46 @@ const Header = ({
                     </button>
                 </div>
                 <div className="flex justify-between items-center gap-x-4">
-                    {
-                        user ? (
-                            <div
-                                className="
-                                    flex
-                                    gap-x-4
-                                    items-center
-                                "
+                    {user ? (
+                        <div className="flex gap-x-4 items-center">
+                            <CustomButton
+                                onClick={handleLogout}
+                                className="bg-white px-6 py-2"
                             >
-                                <button
-                                    onClick={handleLogout}
+                                Logout
+                            </CustomButton>
+                            <CustomButton
+                                onClick={() => router.push('/account')}
+                                className="bg-white"
+                            >
+                                <FaUserAlt />
+                            </CustomButton>
+                        </div>
+                    ) : (
+                        <>
+                            <div>
+                                <CustomButton
+                                    onClick={authModal.onOpen}
+                                    className="
+                    bg-transparent 
+                    text-neutral-300 
+                    font-medium
+                  "
+                                >
+                                    Sign up
+                                </CustomButton>
+                            </div>
+                            <div>
+                                <CustomButton
+                                    onClick={authModal.onOpen}
                                     className="bg-white px-6 py-2"
                                 >
-                                    Loggout
-                                </button>
-                                <button
-                                    onClick={() => router.push('/account')}
-                                    className="bg-white"
-                                >
-                                    <FaUserAlt />
-                                </button>
+                                    Log in
+                                </CustomButton>
                             </div>
-                        ) : (
-                            <>
-                                <div>
-                                    <CustomButton
-                                        onClick={authModal.onOpen}
-                                        className="bg-transparent text-neutral-300 font-medium"
-                                    >
-                                        Sign up
-                                    </CustomButton>
-                                </div>
-
-                                <div>
-                                    <CustomButton
-                                        onClick={authModal.onOpen}
-                                        className="bg-white px-6 py-2"
-                                    >
-                                        Log in
-                                    </CustomButton>
-                                </div>
-                            </>
-
-                        )
-                    }
-                </div >
+                        </>
+                    )}
+                </div>
             </div >
             {children}
         </header >

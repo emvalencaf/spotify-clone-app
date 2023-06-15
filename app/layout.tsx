@@ -1,4 +1,5 @@
 // components
+import { getSongsByUserId } from '../actions'
 import { Sidebar } from '../components'
 
 // providers
@@ -18,11 +19,16 @@ export const metadata = {
   description: 'Listen to your favorite music!',
 }
 
-export default function RootLayout({
+export const revalidate = 0;
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const userSongs = await getSongsByUserId();
+
   return (
     <html lang="en">
       <body
@@ -32,7 +38,9 @@ export default function RootLayout({
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
-            <Sidebar>
+            <Sidebar
+              songs={userSongs}
+            >
               {children}
             </Sidebar>
           </UserProvider>
