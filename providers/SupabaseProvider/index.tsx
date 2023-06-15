@@ -8,7 +8,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 
 // interfaces
-import { Database } from "../../types_db"
+import { Database } from "../../types/database/types_db"
 
 interface SupabaseProviderProps {
     children: React.ReactNode;
