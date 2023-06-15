@@ -3,6 +3,7 @@
 // icons
 import { TbPlaylist } from 'react-icons/tb';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useAuthModal, useUploadModal, useUser } from '../../hooks';
 
 // types
 export interface LibraryProps {
@@ -12,10 +13,19 @@ export interface LibraryProps {
 const Library = ({
 
 }: LibraryProps) => {
+    // modals controller
+    const authModal = useAuthModal();
+    const uploadModal = useUploadModal();
+
+    const { user } = useUser();
 
     // handle click events
     const handleClick = () => {
-        // TODO: upload later
+        if (!user) return authModal.onOpen();
+
+        // TODO: Check for subscription
+
+        return uploadModal.onOpen();
     }
 
     return (

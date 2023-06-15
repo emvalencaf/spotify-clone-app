@@ -2,6 +2,10 @@
 
 // hooks
 import { useRouter } from "next/navigation";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+
+// custom hooks
+import { useAuthModal, useUser } from "../../hooks";
 
 // icons
 import { HiHome } from 'react-icons/hi';
@@ -11,7 +15,10 @@ import { BiSearch } from 'react-icons/bi';
 // tailwindcss deps
 import { twMerge } from "tailwind-merge";
 import { CustomButton } from "..";
-import { useAuthModal } from "../../hooks";
+import { FaUserAlt } from "react-icons/fa";
+
+// toast deps
+import toast from "react-hot-toast";
 
 // types
 export interface HeaderProps {
@@ -26,10 +33,22 @@ const Header = ({
     // router states
     const router = useRouter();
 
+    // get auth modal funcs
     const authModal = useAuthModal();
 
-    const handleLogout = () => {
-        // TODO: handle logout
+    // supabase client
+    const supabaseClient = useSupabaseClient();
+
+    const { user } = useUser();
+
+    const handleLogout = async () => {
+        const { error } = await supabaseClient.auth.signOut();
+
+        // TODO: Reset any pplaying songs
+
+        router.refresh();
+
+        error ? toast.error(error.message): toast.success('Logged out');
     }
 
     return (
@@ -86,7 +105,7 @@ const Header = ({
                     className="flex md:hidden gap-x-2 items-center"
                 >
                     <button
-                    onClick={() => router.push('/')}
+                        onClick={() => router.push('/')}
                         className="
                         rounded-full 
                         p-2 
@@ -124,29 +143,55 @@ const Header = ({
                     </button>
                 </div>
                 <div className="flex justify-between items-center gap-x-4">
-                    <>
-                        <div>
-                            <CustomButton
-                                onClick={authModal.onOpen}
-                                className="bg-transparent text-neutral-300 font-medium"
+                    {
+                        user ? (
+                            <div
+                                className="
+                                    flex
+                                    gap-x-4
+                                    items-center
+                                "
                             >
-                                Sign up
-                            </CustomButton>
-                        </div>
+                                <button
+                                    onClick={handleLogout}
+                                    className="bg-white px-6 py-2"
+                                >
+                                    Loggout
+                                </button>
+                                <button
+                                    onClick={() => router.push('/account')}
+                                    className="bg-white"
+                                >
+                                    <FaUserAlt />
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <div>
+                                    <CustomButton
+                                        onClick={authModal.onOpen}
+                                        className="bg-transparent text-neutral-300 font-medium"
+                                    >
+                                        Sign up
+                                    </CustomButton>
+                                </div>
 
-                        <div>
-                            <CustomButton
-                                onClick={authModal.onOpen}
-                                className="bg-white px-6 py-2"
-                            >
-                                Log in
-                            </CustomButton>
-                        </div>
-                    </>
-                </div>
-            </div>
+                                <div>
+                                    <CustomButton
+                                        onClick={authModal.onOpen}
+                                        className="bg-white px-6 py-2"
+                                    >
+                                        Log in
+                                    </CustomButton>
+                                </div>
+                            </>
+
+                        )
+                    }
+                </div >
+            </div >
             {children}
-        </header>
+        </header >
     );
 }
 
