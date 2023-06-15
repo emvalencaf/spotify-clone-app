@@ -2,7 +2,7 @@
 import { Sidebar } from '../components'
 
 // providers
-import { ModalProvider, SupabaseProvider, UserProvider } from '../providers'
+import { ModalProvider, SupabaseProvider, ToasterProvider, UserProvider } from '../providers'
 
 
 // styles
@@ -28,6 +28,7 @@ export default function RootLayout({
       <body
         className={font.className}
       >
+        <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
