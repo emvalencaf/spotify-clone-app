@@ -1,7 +1,7 @@
 "use client";
 
 // custom hooks
-import { useAuthModal, useOnPlay, useUploadModal, useUser } from '../../hooks';
+import { useAuthModal, useOnPlay, useSubscribeModal, useUploadModal, useUser } from '../../hooks';
 
 // custom components
 import { MediaItem } from '..';
@@ -20,10 +20,11 @@ const Library = ({
     songs,
 }: LibraryProps) => {
     // modals controller
+    const subscribeModal = useSubscribeModal();
     const authModal = useAuthModal();
     const uploadModal = useUploadModal();
 
-    const { user } = useUser();
+    const { user, subscription } = useUser();
 
     const onPlay = useOnPlay(songs);
 
@@ -31,26 +32,17 @@ const Library = ({
     const handleClick = () => {
         if (!user) return authModal.onOpen();
 
-        // TODO: Check for subscription
+        if (!subscription) return subscribeModal.onOpen();
 
         return uploadModal.onOpen();
     }
 
     return (
-        <div
-            className="flex flex-col"
-        >
-            <div
-                className="flex items-center justify-between px-5 pt-4"
-            >
+        <div className="flex flex-col">
+            <div className="flex items-center justify-between px-5 pt-4">
                 <div className="inline-flex items-center gap-x-2">
-                    <TbPlaylist
-                        className='text-neutral-400'
-                        size={26}
-                    />
-                    <p
-                        className='text-neutral-400 font-medium text-md'
-                    >
+                    <TbPlaylist className="text-neutral-400" size={26} />
+                    <p className="text-neutral-400 font-medium text-md">
                         Your Library
                     </p>
                 </div>
@@ -58,25 +50,21 @@ const Library = ({
                     onClick={handleClick}
                     size={20}
                     className="
-                    text-neutral-400 
-                    cursor-pointer 
-                    hover:text-white 
-                    transition
-                    "
+              text-neutral-400 
+              cursor-pointer 
+              hover:text-white 
+              transition
+            "
                 />
             </div>
-            <div
-                className="flex flex-col gap-y-2 mt-4 px-3"
-            >
-                {
-                    songs.map((song) => (
-                        <MediaItem
-                            key={song.id}
-                            onClick={(id: string) => onPlay(id)}
-                            data={song}
-                        />
-                    ))
-                }
+            <div className="flex flex-col gap-y-2 mt-4 px-3">
+                {songs.map((item) => (
+                    <MediaItem
+                        onClick={(id: string) => onPlay(id)}
+                        key={item.id}
+                        data={item}
+                    />
+                ))}
             </div>
         </div>
     );

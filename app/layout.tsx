@@ -1,5 +1,5 @@
 // components
-import { getSongsByUserId } from '../actions'
+import { getActiveProductsWithPrices, getSongsByUserId } from '../actions'
 import { Player, Sidebar } from '../components'
 
 // providers
@@ -28,6 +28,7 @@ export default async function RootLayout({
 }) {
 
   const userSongs = await getSongsByUserId();
+  const products = await getActiveProductsWithPrices();
 
   return (
     <html lang="en">
@@ -37,7 +38,7 @@ export default async function RootLayout({
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider />
+            <ModalProvider products={products} />
             <Sidebar
               songs={userSongs}
             >

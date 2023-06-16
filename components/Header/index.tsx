@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 // custom hooks
-import { useAuthModal, useUser } from "../../hooks";
+import { useAuthModal, usePlayer, useUser } from "../../hooks";
 
 // icons
 import { HiHome } from 'react-icons/hi';
@@ -30,6 +30,7 @@ const Header = ({
     children,
     className,
 }: HeaderProps) => {
+    const player = usePlayer();
     // router states
     const router = useRouter();
 
@@ -46,7 +47,7 @@ const Header = ({
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
 
-        // TODO: Reset any pplaying songs
+        player.reset();
 
         router.refresh();
 
@@ -54,7 +55,7 @@ const Header = ({
     }
 
     return (
-        <header
+        <div
             className={twMerge(`
                 h-fit
                 bg-gradient-to-b
@@ -62,86 +63,71 @@ const Header = ({
                 p-6
             `, className)}
         >
-            <div
-                className="w-full mb-4 flex items-center justify-between"
-            >
-                <div
-                    className="hidden md:flex gap-x-2 items-center"
-                >
+            <div className="w-full mb-4 flex items-center justify-between">
+                <div className="hidden md:flex gap-x-2 items-center">
                     <button
-                        className="              rounded-full 
+                        onClick={() => router.back()}
+                        className="
+              rounded-full 
               bg-black 
               flex 
               items-center 
               justify-center 
               cursor-pointer 
               hover:opacity-75 
-              transition"
+              transition
+            "
                     >
-                        <RxCaretLeft
-                            onClick={() => router.back()}
-                            className="text-white"
-                            size={35}
-                        />
+                        <RxCaretLeft className="text-white" size={35} />
                     </button>
                     <button
+                        onClick={() => router.forward()}
                         className="
-                        rounded-full 
-                        bg-black 
-                        flex 
-                        items-center 
-                        justify-center 
-                        cursor-pointer 
-                        hover:opacity-75 
-                        transition
-                        "
+              rounded-full 
+              bg-black 
+              flex 
+              items-center 
+              justify-center 
+              cursor-pointer 
+              hover:opacity-75 
+              transition
+            "
                     >
-                        <RxCaretRight
-                            onClick={() => router.forward()}
-                            className="text-white"
-                            size={35}
-                        />
+                        <RxCaretRight className="text-white" size={35} />
                     </button>
                 </div>
-                <div
-                    className="flex md:hidden gap-x-2 items-center"
-                >
+                <div className="flex md:hidden gap-x-2 items-center">
                     <button
                         onClick={() => router.push('/')}
                         className="
-                        rounded-full 
-                        p-2 
-                        bg-white 
-                        flex 
-                        items-center 
-                        justify-center 
-                        cursor-pointer 
-                        hover:opacity-75 
-                        transition
-                        "
+              rounded-full 
+              p-2 
+              bg-white 
+              flex 
+              items-center 
+              justify-center 
+              cursor-pointer 
+              hover:opacity-75 
+              transition
+            "
                     >
-                        <HiHome
-                            className="text-black"
-                            size={20}
-                        />
+                        <HiHome className="text-black" size={20} />
                     </button>
                     <button
+                        onClick={() => router.push('/search')}
                         className="
-                        rounded-full 
-                        p-2 
-                        bg-white 
-                        flex 
-                        items-center 
-                        justify-center 
-                        cursor-pointer 
-                        hover:opacity-75 
-                        transition
-                    "
+              rounded-full 
+              p-2 
+              bg-white 
+              flex 
+              items-center 
+              justify-center 
+              cursor-pointer 
+              hover:opacity-75 
+              transition
+            "
                     >
-                        <BiSearch
-                            className="text-black"
-                            size={20}
-                        />
+                        <BiSearch className="text-black" size={20} />
                     </button>
                 </div>
                 <div className="flex justify-between items-center gap-x-4">
@@ -185,9 +171,9 @@ const Header = ({
                         </>
                     )}
                 </div>
-            </div >
+            </div>
             {children}
-        </header >
+        </div >
     );
 }
 
