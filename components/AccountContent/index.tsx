@@ -26,7 +26,7 @@ const AccountContent = () => {
 
     useEffect(() => {
         if (!isLoading && !user) router.replace('/');
-    },[isLoading, user, router]);
+    }, [isLoading, user, router]);
 
     const redirectToCustomerPortal = async () => {
         setLoading(true);
@@ -47,28 +47,23 @@ const AccountContent = () => {
     }
 
     return (
-        <div
-            className="mb-7 px-6"
-        >
+        <div className="mb-7 px-6">
             {!subscription && (
-                <div
-                    className="flex flex-col gap-y-4"
-                >
-                    <p>
-                        No active plan.
-                    </p>
-                    <button
+                <div className="flex flex-col gap-y-4">
+                    <p>No active plan.</p>
+                    <CustomButton
                         onClick={subscribeModal.onOpen}
                         className="w-[300px]"
                     >
-                        Subscriibe
-                    </button>
+                        Subscribe
+                    </CustomButton>
                 </div>
             )}
             {subscription && (
                 <div className="flex flex-col gap-y-4">
-                    <p>
-                        You are currently on the <b>{subscription?.prices?.products?.name}</b> plan.
+                    <p>You are currently on the
+                        <b> {subscription?.prices?.products?.name} </b>
+                        plan.
                     </p>
                     <CustomButton
                         disabled={loading || isLoading}
