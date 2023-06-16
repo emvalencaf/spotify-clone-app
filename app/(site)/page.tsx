@@ -9,8 +9,6 @@ import { getSongs } from '../../actions'
 
 export default async function Home() {
   const songs = await getSongs();
-  
-  throw new Error('Testing!');
 
   return (
     <div

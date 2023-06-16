@@ -1,3 +1,39 @@
+# SPOTIFY CLONE
+
+This a [Spotify]() clone webapp built using react.js, next.js (13 version), [supabase]() and [stripe]().
+
+## FEATURES
+
+- [x] Authentication system with sign in and sign up using an email and password;
+- [x] Authentication system with sign in with a Github account;
+- [x] Upload a music (.mp3 file) while authenticated;
+- [x] List all musics on our database and store;
+- [x] Play/pause music (and mute/unmute or diminished or raise the volume) while authenticated;
+- [x] Add/remove musics from favorite list (liked musics);
+- [x] Listen a list of music (the favorite list) with the option to listen the previous or skip to the next music;
+- [] 
+
+## HOW TO MAKE WORK
+
+1. First of all, open up a terminal at the root folder and type the follow command: ``npm install``;
+2. Now open up the file ``.env.example`` and copy and paste its content;
+3. Create a new file at the project root named ``.env.local`` and paste the copied content, it must look like this:
+```
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+```
+4. Now is time to create a new account at [Supabase]() at get the url, anon key and the service role key;
+5. Fill up the values at the env.local;
+6. Create a new account at [Stripe]() at get the publishablle key and secret key and fill their values at the env variables at ``env.local``;
+
+## [DEMO]()
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
