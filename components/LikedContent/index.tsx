@@ -2,7 +2,7 @@
 // interfaces
 import { useRouter } from "next/navigation";
 import { Song } from "../../types/song";
-import { useUser } from "../../hooks";
+import { useOnPlay, useUser } from "../../hooks";
 import { useEffect } from "react";
 import MediaItem from "../MediaItem";
 import LikeButton from "../LikeButton";
@@ -17,6 +17,8 @@ const LikedContent = ({
     const router = useRouter();
 
     const { isLoading, user } = useUser();
+
+    const onPlay = useOnPlay(songs);
 
     useEffect(() => {
 
@@ -62,7 +64,7 @@ const LikedContent = ({
                     >
                         <div className="flex-1">
                             <MediaItem
-                                onClick={() => {}}
+                                onClick={(id: string) => onPlay(id)}
                                 data={song}
                             />
                         </div>

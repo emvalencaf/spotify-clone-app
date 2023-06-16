@@ -17,11 +17,15 @@ export interface SidebarProps {
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import { Song } from '../../types/song';
+import { usePlayer } from '../../hooks';
+import { twMerge } from 'tailwind-merge';
 
 
 const Sidebar = ({ children, songs }: SidebarProps) => {
     // states navigation
     const pathname = usePathname();
+
+    const player = usePlayer();
 
     const routes = useMemo(() => [
         {
@@ -40,7 +44,15 @@ const Sidebar = ({ children, songs }: SidebarProps) => {
 
     return (
         <div
-            className='flex h-full'
+            className={
+                twMerge(
+                    `
+                    flex
+                    h-full
+                    `,
+                    player.activeId && "h-[calc(100%-80px)]"
+                )
+            }
         >
             <div
                 className="

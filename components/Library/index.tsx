@@ -1,7 +1,7 @@
 "use client";
 
 // custom hooks
-import { useAuthModal, useUploadModal, useUser } from '../../hooks';
+import { useAuthModal, useOnPlay, useUploadModal, useUser } from '../../hooks';
 
 // custom components
 import { MediaItem } from '..';
@@ -24,6 +24,8 @@ const Library = ({
     const uploadModal = useUploadModal();
 
     const { user } = useUser();
+
+    const onPlay = useOnPlay(songs);
 
     // handle click events
     const handleClick = () => {
@@ -65,7 +67,7 @@ const Library = ({
                     songs.map((song) => (
                         <MediaItem
                             key={song.id}
-                            onClick={() => { }}
+                            onClick={(id: string) => onPlay(id)}
                             data={song}
                         />
                     ))

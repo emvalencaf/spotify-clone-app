@@ -87,4 +87,4 @@ const Liked = async () => {
     )
 }
 
-export defualt Liked;
+export default Liked;
