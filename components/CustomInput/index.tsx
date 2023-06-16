@@ -8,8 +8,6 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({
     className,
     type,
     disabled,
-    placeholder,
-    onChange,
     ...props
 }: CustomInputProps, ref) => {
     return (
@@ -34,7 +32,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({
                     disabled:cursor-not-allowed
                     disabled:opacity-50
                     focus:outline-none
-                `, className)
+                `, disabled && 'opacity-75', className)
             }
             disabled={disabled}
             ref={ref}

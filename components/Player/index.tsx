@@ -1,16 +1,12 @@
 "use client";
 
-import { PlayerContent } from "..";
 // custom hooks
 import { useGetSongById, useLoadSongUrl, usePlayer } from "../../hooks";
 
-export interface PlayerProps {
+// custom components
+import { PlayerContent } from "..";
 
-}
-
-const Player = ({
-
-}: PlayerProps) => {
+const Player = () => {
     // store player
     const player = usePlayer();
 

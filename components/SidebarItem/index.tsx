@@ -33,7 +33,7 @@ const SidebarItem = ({
             transition
             text-neutral-400
             py-1`,
-                active && "text-white"
+            active && "text-white"
             )
             }
         >

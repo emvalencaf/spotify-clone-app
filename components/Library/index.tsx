@@ -57,7 +57,12 @@ const Library = ({
                 <AiOutlinePlus
                     onClick={handleClick}
                     size={20}
-                    className='text-neutral-400 cursor-pointer hover:text-white transition'
+                    className="
+                    text-neutral-400 
+                    cursor-pointer 
+                    hover:text-white 
+                    transition
+                    "
                 />
             </div>
             <div

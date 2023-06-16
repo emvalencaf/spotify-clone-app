@@ -139,10 +139,10 @@ const UploadModal = () => {
                 <CustomInput
                     id="title"
                     disabled={isLoading}
+                    placeholder="Song title"
                     {...register('title', {
                         required: true,
                     })}
-                    placeholder="Song title"
                 />
                 <CustomInput
                     id="author"

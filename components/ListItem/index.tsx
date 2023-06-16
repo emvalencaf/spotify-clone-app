@@ -47,9 +47,7 @@ const ListItem = ({
         >
             <div
                 className="
-                    relative
-                    min-h-[64px]
-                    min-w-[64px]
+                relative min-h-[64px] min-w-[64px]
                 "
             >
                 <Image
