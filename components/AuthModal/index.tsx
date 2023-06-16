@@ -15,7 +15,8 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Auth } from "@supabase/auth-ui-react";
 
 // custom components
-import { Modal } from "..";
+import { CustomButton, Modal } from "..";
+import { demoAccount } from "../../constants";
 
 const AuthModal = () => {
     // supabase client
@@ -39,6 +40,18 @@ const AuthModal = () => {
     const handleChange = (open: boolean) => {
         if(!open) {
             onClose();
+        }
+    }
+
+    // demo account button
+    const handleDemoAccount = async () => {
+        try {
+            await supabaseClient.auth.signInWithPassword({
+                ...demoAccount,
+            });
+            
+        } catch (error: any) {
+            
         }
     }
 
@@ -66,6 +79,11 @@ const AuthModal = () => {
                     },
                 }}
             />
+            <CustomButton
+                onClick={handleDemoAccount}
+            >
+                Sign in with DEMO Account
+            </CustomButton>
         </Modal>
     )
 };
