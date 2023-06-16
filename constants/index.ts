@@ -1,5 +1,5 @@
 
 export const demoAccount = {
-    email: 'edsonmvf@gmail.com',
+    email: 'demo@demo.com.br',
     password: '123456',
 }

@@ -10,29 +10,21 @@ import { stripe } from "../../../libs/stripe";
 import { getURL } from '../../../libs/helpers';
 import { createOrRetrieveCustomer } from "../../../libs/supabaseAdmin";
 
-export async function POST(request: Request) {
-    const {
-        price,
-        quantity = 1,
-        metadata = {}
-    } = await request.json();
-
+export async function POST(
+    request: Request
+) {
+    const { price, quantity = 1, metadata = {} } = await request.json();
 
     try {
-
         const supabase = createRouteHandlerClient({
-            cookies,
-        });
-
-        const {
-            data: {
-                user
-            }
+            cookies
+        }); const {
+            data: { user }
         } = await supabase.auth.getUser();
 
         const customer = await createOrRetrieveCustomer({
             uuid: user?.id || '',
-            email: user?.email || '',
+            email: user?.email || ''
         });
 
         const session = await stripe.checkout.sessions.create({
@@ -42,28 +34,22 @@ export async function POST(request: Request) {
             line_items: [
                 {
                     price: price.id,
-                    quantity,
+                    quantity
                 }
             ],
             mode: 'subscription',
             allow_promotion_codes: true,
             subscription_data: {
                 trial_from_plan: true,
-                metadata,
+                metadata
             },
             success_url: `${getURL()}/account`,
-            cancel_url: `${getURL()}`,
+            cancel_url: `${getURL()}/`
         });
 
-        return NextResponse.json({
-            sessionId: session.id,
-        });
-
-    } catch (error: any) {
-        console.log(error);
-        return new NextResponse('Internal Error', {
-            status: 500,
-        })
+        return NextResponse.json({ sessionId: session.id });
+    } catch (err: any) {
+        console.log(err);
+        return new NextResponse('Internal Error', { status: 500 });
     }
-
 }

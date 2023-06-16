@@ -17,32 +17,24 @@ export async function POST() {
         });
 
         const {
-            data: {
-                user
-            }
+            data: { user }
         } = await supabase.auth.getUser();
 
-        if (!user) throw new Error('Could not get user');
-
+        if (!user) throw Error('Could not get user');
         const customer = await createOrRetrieveCustomer({
-            uuid: user?.id || '',
-            email: user?.email || '',
+            uuid: user.id || '',
+            email: user.email || ''
         });
 
-        if (!customer) throw new Error('Could not get customer');
-
-        const {
-            url
-        } = await stripe.billingPortal.sessions.create({
+        if (!customer) throw Error('Could not get customer');
+        const { url } = await stripe.billingPortal.sessions.create({
             customer,
-            return_url: `${getURL}/account`
+            return_url: `${getURL()}/account`
         });
 
-        return NextResponse.json({ url })
-    } catch (error: any) {
-        console.log(error);
-        return new NextResponse('Internal Error', {
-            status: 500,
-        });
+        return NextResponse.json({ url });
+    } catch (err: any) {
+        console.log(err);
+        new NextResponse('Internal Error', { status: 500 })
     }
-}
+};
