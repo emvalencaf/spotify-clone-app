@@ -1,3 +1,4 @@
+import AccountContent from "./AccountContent";
 import AuthModal from "./AuthModal";
 import Box from "./Box";
 import CustomButton from "./CustomButton";
@@ -19,9 +20,11 @@ import Sidebar from "./Sidebar";
 import SidebarItem from "./SidebarItem";
 import Slider from "./Slider";
 import SongItem from "./SongItem";
+import SubscribeModal from "./SubscribeModal";
 import UploadModal from "./UploadModal";
 
 export {
+    AccountContent,
     AuthModal,
     Box,
     CustomButton,
@@ -43,5 +46,6 @@ export {
     SidebarItem,
     Slider,
     SongItem,
+    SubscribeModal,
     UploadModal,
 }
